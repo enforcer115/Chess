@@ -6,6 +6,7 @@ class Player:
         self.player = player
         self.piece_list = []
         self.init_pieces()
+        self.capture_list = []
 
     def init_pieces(self):
         piece_list = []

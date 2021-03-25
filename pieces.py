@@ -6,6 +6,7 @@ must check if king is in check before moving, somewhat complicated
 piece garanteed to not get current position as a move
 """
 
+
 # generic class that defines a piece, including "empty" pieces
 class Piece:
     def __init__(self, location_x, location_y, player):

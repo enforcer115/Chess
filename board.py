@@ -32,12 +32,13 @@ class Board:
                 or c_x < 0
                 or c_y > 7
                 or c_y < 0):
-            print("that is not a valid selection")
+            print("Selection out of bounds")
             return False
 
         if self.board[p_x][p_y].player != self.turn:
             print("It is not your turn")
             return False
+        self.valid_move(p_x, p_y, c_x, c_y)
 
 
     def valid_move(self, p_x, p_y, c_x, c_y):
@@ -45,6 +46,40 @@ class Board:
             place_holder = self.board[c_x][c_y]
             # move piece to new spot
             self.board[c_x][c_y] = self.board[p_x][p_y]
+            self.board[c_x][c_y].x = c_x
+            self.board[c_x][c_y].y = c_y
             self.board[p_x][p_y] = self.empty
+
+            if self.check_king():
+                if self.turn == "white":
+                    if place_holder.player != "empty":
+                        self.b_player.capture_list.append(place_holder)
+                    self.turn = "black"
+                else:
+                    self.w_player.capture_list.append(place_holder)
+                    self.turn = "white"
+                print("turn successful: " + self.turn + "s turn")
+            else:
+                # undo turn
+                self.board[p_x][p_y] = self.board[c_x][c_y]
+                self.board[c_x][c_y] = place_holder
+        else:
+            print("not a valid move for that piece")
+    # returns true if king is not in check
+    def check_king(self):
+        king_x = -1
+        king_y = -1
+
+        # find the king
+        for col in self.board:
+            for row in col:
+                if row.type == "king" and row.player == self.turn:
+                    king_x = row.x
+                    king_y = row.y
+        for col in self.board:
+            for row in col:
+                if row.player != self.turn and row.player != "empty" and row.move(king_x, king_y, self.board):
+                    return False
+        return True
 
 
