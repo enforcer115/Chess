@@ -65,6 +65,7 @@ class Board:
                 self.board[c_x][c_y] = place_holder
         else:
             print("not a valid move for that piece")
+
     # returns true if king is not in check
     def check_king(self):
         king_x = -1
@@ -79,6 +80,7 @@ class Board:
         for col in self.board:
             for row in col:
                 if row.player != self.turn and row.player != "empty" and row.move(king_x, king_y, self.board):
+                    print("king is in check")
                     return False
         return True
 
