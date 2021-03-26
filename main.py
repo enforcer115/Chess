@@ -1,5 +1,5 @@
 import board
-import square
+import gui
 import tkinter as tk
 
 

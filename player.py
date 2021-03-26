@@ -30,8 +30,8 @@ class Player:
         self.piece_list.append(pieces.Knight(1, back_row, self.player))
         self.piece_list.append(pieces.Knight(6, back_row, self.player))
 
-        self.piece_list.append(pieces.Rook(2, back_row, self.player))
-        self.piece_list.append(pieces.Rook(5, back_row, self.player))
+        self.piece_list.append(pieces.Bishop(2, back_row, self.player))
+        self.piece_list.append(pieces.Bishop(5, back_row, self.player))
 
         self.piece_list.append(pieces.Queen(3, back_row, self.player))
 

@@ -166,7 +166,7 @@ class Rook(Piece):
 class Bishop(Piece):
     def __init__(self, x, y, player):
         super().__init__(x, y, player)
-        type = "bishop"
+        self.type = "bishop"
 
     # abstract out move so queen can use it
     def bishop_move(self, x, y, board):
@@ -204,6 +204,7 @@ class Bishop(Piece):
 class Queen(Rook, Bishop):
     def __init__(self, x, y, player):
         super().__init__(x, y, player)
+        self.type = "queen"
 
     def move(self, x, y, board):
         if self.rook_move(x, y, board) or self.bishop_move(x, y, board):

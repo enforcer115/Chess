@@ -12,9 +12,9 @@ class Board:
         self.init_board()
 
     def init_board(self):
-        for x in range(12):
+        for x in range(8):
             column = []
-            for y in range(12):
+            for y in range(8):
                 column.append(self.empty)
             self.board.append(column)
 
