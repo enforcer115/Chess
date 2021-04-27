@@ -31,7 +31,7 @@ class GuiBoard(board.Board):
 
                 button_cmd = partial(self.gui_move, row, col)
                 button = tk.Button(master=self.window, command=button_cmd, bg=color,
-                                   highlightbackground="grey")
+                                   highlightbackground="gray", activebackground="salmon1")
                 button.grid(row=row, column=col, sticky="nsew")
                 btn_sub_list.append(button)
 
@@ -47,9 +47,10 @@ class GuiBoard(board.Board):
 
                 if col.player == "black":
                     self.buttons[7 - c_num][r_num].config(fg="black")
+                    self.buttons[7 - c_num][r_num].config(activeforeground="black")
                 else:
                     self.buttons[7 - c_num][r_num].config(fg="green")
-
+                    self.buttons[7 - c_num][r_num].config(activeforeground="green")
     @staticmethod
     def get_identifier(text):
         switcher = {
@@ -72,7 +73,7 @@ class GuiBoard(board.Board):
         elif self.first_selection == [-1, -1]:
             self.first_selection = [x, y]
             self.save_color = self.buttons[x][y]["bg"]
-            self.buttons[x][y]["bg"] = "gray63"
+            self.buttons[x][y]["bg"] = "salmon1"
 
         else:
             self.buttons[self.first_selection[0]][self.first_selection[1]]["bg"] = self.save_color
@@ -81,28 +82,7 @@ class GuiBoard(board.Board):
 
         self.update_gui()
 
-        print(str(x) + " " + str(y))
 
 
-class Square:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-        self.window = tk.Tk()
-        self.window.rowconfigure([0, 1, 2, 3, 4, 5, 6, 7], minsize=100, weight=1)
-        self.window.columnconfigure([0, 1, 2, 3, 4, 5, 6, 7], minsize=100, weight=1)
-        self.btn = tk.Button(master=self.window, command=lambda: self.update(1, 2), bg="black",
-                             highlightbackground="grey", text="Q")
-        self.btn2 = tk.Button(master=self.window, command=lambda: self.update(3, 3), bg="black",
-                              highlightbackground="grey", text="Q")
-        self.btn2.grid(row=7, column=7, sticky="nsew")
-        self.btn.grid(row=self.x, column=self.y, sticky="nsew")
-        self.window.mainloop()
-
-    def update(self, x, y):
-        self.btn["bg"] = "blue"
-        print(str(x) + " " + str(y))
 
 
-gui_board = GuiBoard()
-square = Square(7, 0)

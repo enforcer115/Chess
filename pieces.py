@@ -14,6 +14,7 @@ class Piece:
         self.y = location_y
         self.player = player
         self.type = "empty"
+        self.has_moved = False
 
     # just so I can generally call move, probably bad practice
     def move(self, x, y, board):
@@ -43,7 +44,7 @@ class Pawn(Piece):
         if (x == self.x
                 and y == self.y + self.y_dir
                 and board[self.x][self.y + self.y_dir].type == "empty"):
-            self.has_moved = True
+
             return True
 
         # move forward 2
@@ -52,7 +53,7 @@ class Pawn(Piece):
                 and self.has_moved is False
                 and board[self.x][self.y + self.y_dir].type == "empty"
                 and board[self.x][self.y + self.y_dir].type == "empty"):
-            self.has_moved = True
+
             return True
 
         # attack sideways to the right
@@ -60,7 +61,7 @@ class Pawn(Piece):
                 and x == self.x + 1
                 and board[x][y].type != "empty"
                 and board[x][y].player != self.player):
-            self.has_moved = True
+
             return True
 
         # attack sideways to the left
@@ -68,7 +69,7 @@ class Pawn(Piece):
                 and x == self.x - 1
                 and board[x][y].type != "empty"
                 and board[x][y].player != self.player):
-            self.has_moved = True
+
             return True
         return False
 
@@ -93,6 +94,7 @@ class King(Piece):
     def __init__(self, x, y, player):
         super().__init__(x, y, player)
         self.type = "king"
+
 
     def move(self, x, y, board):
         if ((abs(x - self.x) < 2 and abs(y - self.y) < 2)
